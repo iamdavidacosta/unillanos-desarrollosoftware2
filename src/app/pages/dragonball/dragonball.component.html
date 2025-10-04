@@ -1,53 +1,57 @@
-<h1>Page - Dragonball</h1>
-<hr>
-<section class="row">
-  <div class="col-12 col-sm-6">
-    <h3>Agregar: {{ name()}}</h3>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Nombre"
-      [value]="name()"
-      (change)="name.set(txtName.value)"
-      (input)="name.set(txtName.value)"
-      #txtName
-    >
-    <input
-      type="number"
-      class="form-control mt-2"
-      placeholder="Poder"
-      [value]="power()"
-      (input)="power.set(+txtPower.value)"
-      #txtPower
-    >
-    <button
-      class="mt-2 btn btn-primary"
-      (click)="addCharacter()"
-    >Gurdar</button>
+<div class="container-fluid">
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-primary fw-bold">Dragon Ball</h1>
+    <p class="lead text-muted">Gestiona tu lista de personajes</p>
   </div>
 
-  <div class="col-12 col-sm-6">
-    <h3>Listado</h3>
-    <ul>
-      @for(character of characters(); track character.id; let idx = $index){
-        @if(character.power > 1000) {
-          <li>
-            <span>{{ idx + 1 }} - {{ character.name }}: </span>
-            <!--
-            <span
-              [class.text-danger]="character.power > 8000"
-              [class.text-info]="character.power <= 8000"
-            >{{ character.power }}</span> -->
-            <span [ngClass]="powerClass()">{{ character.power }}</span>
-          </li>
-        } @else {
-          <li>
-            <span>Personaje con power bajo</span>
-          </li>
+  <section class="row">
+    <div class="col-12 col-sm-6">
+      <h3>Agregar Personaje</h3>
+      <div class="mb-3">
+        <label class="form-label">Nombre: {{ name()}}</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre del personaje"
+          [value]="name()"
+          (change)="name.set(txtName.value)"
+          (input)="name.set(txtName.value)"
+          #txtName
+        >
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Poder</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Nivel de poder"
+          [value]="power()"
+          (input)="power.set(+txtPower.value)"
+          #txtPower
+        >
+      </div>
+      <button
+        class="btn btn-primary w-100"
+        (click)="addCharacter()"
+      >Agregar</button>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <h3>Listado de Personajes</h3>
+      <ul>
+        @for(character of characters(); track character.id; let idx = $index){
+          @if(character.power > 1000) {
+            <li>
+              <span><strong>{{ idx + 1 }}.</strong> {{ character.name }}</span>
+              <span [ngClass]="powerClass()" class="badge bg-secondary">{{ character.power }}</span>
+            </li>
+          } @else {
+            <li>
+              <span class="text-muted">Personaje con poder bajo</span>
+            </li>
+          }
         }
-
-      }
-    </ul>
-  </div>
-
-</section>
+      </ul>
+    </div>
+  </section>
+</div>

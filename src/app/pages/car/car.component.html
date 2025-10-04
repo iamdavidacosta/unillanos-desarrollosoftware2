@@ -1,32 +1,91 @@
-<h1>{{ brand() }}</h1>
+<div class="container-fluid">
+  <!-- Header Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-primary fw-bold">Gestión de Vehículos</h1>
+    <p class="lead text-muted">Administra la información de tu vehículo</p>
+  </div>
 
-<dl>
-  <td>Marca:</td>
-  <dd>{{ brand() }}</dd>
+  <section class="row">
+    <!-- Car Information Card -->
+    <div class="col-12 col-sm-6">
+      <div class="car-info-section">
+        <h3>Información del Vehículo</h3>
+        
+        <div class="info-group">
+          <label class="info-label">Marca</label>
+          <div class="info-value">{{ brand() }}</div>
+        </div>
 
-  <td>Año:</td>
-  <dd>{{ year() }}</dd>
+        <div class="info-group">
+          <label class="info-label">Año</label>
+          <div class="info-value">{{ year() }}</div>
+        </div>
 
-  <td>Descripción:</td>
-  <dd>{{getCarDescription() }}</dd>
+        <div class="info-group">
+          <label class="info-label">Descripción Completa</label>
+          <div class="info-value">{{ getCarDescription() }}</div>
+        </div>
 
-  <td>Estudiante:</td>
-  <dd>{{ student() }}</dd>
+        <div class="info-group">
+          <label class="info-label">Propietario</label>
+          <div class="info-value">{{ student() }}</div>
+        </div>
 
-  <td>Nombre en mayuscula:</td>
-  <dd>{{ capitalizedStudent() }}</dd>
-  <dd>{{ student().toUpperCase() }}</dd>
-  <dd>{{ student() | uppercase }}</dd>
-</dl>
+        <div class="info-group">
+          <label class="info-label">Nombre en Mayúscula</label>
+          <div class="transform-options">
+            <div class="transform-item">
+              <small class="text-muted">Capitalizado:</small>
+              <span class="badge bg-secondary">{{ capitalizedStudent() }}</span>
+            </div>
+            <div class="transform-item">
+              <small class="text-muted">Método:</small>
+              <span class="badge bg-secondary">{{ student().toUpperCase() }}</span>
+            </div>
+            <div class="transform-item">
+              <small class="text-muted">Pipe:</small>
+              <span class="badge bg-secondary">{{ student() | uppercase }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<button (click)="changeCar()" class="btn btn-primary mx-2">
-  Cambiar carro
-</button>
+    <!-- Actions Card -->
+    <div class="col-12 col-sm-6">
+      <div class="car-actions-section">
+        <h3>Acciones Disponibles</h3>
+        
+        <p class="text-muted mb-4">Utiliza los siguientes botones para modificar la información del vehículo:</p>
 
-<button (click)="changeYear()" class="btn btn-success mx-2">
-  Cambiar año
-</button>
+        <div class="action-buttons">
+          <button (click)="changeCar()" class="btn btn-primary btn-lg">
+            Cambiar Carro
+          </button>
 
-<button (click)="resetForm()" class="btn btn-secondary mx-2">
-  Reset
-</button>
+          <button (click)="changeYear()" class="btn btn-info btn-lg">
+            Actualizar Año
+          </button>
+
+          <button (click)="resetForm()" class="btn btn-outline-secondary btn-lg">
+            Restablecer
+          </button>
+        </div>
+
+        <!-- Car Status Badge -->
+        <div class="car-status">
+          <label class="info-label">Estado del Vehículo</label>
+          <div class="status-badge">
+            @if(year() >= 2020) {
+              <span class="badge bg-secondary">Vehículo Moderno</span>
+            } @else if(year() >= 2015) {
+              <span class="badge bg-secondary">Vehículo Reciente</span>
+            } @else {
+              <span class="badge bg-secondary">Vehículo Clásico</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
