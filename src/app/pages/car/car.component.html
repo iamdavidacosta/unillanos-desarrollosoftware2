@@ -1,91 +1,158 @@
 <div class="container-fluid">
-  <!-- Header Section -->
-  <div class="text-center mb-4">
-    <h1 class="display-4 text-primary fw-bold">Gestión de Vehículos</h1>
-    <p class="lead text-muted">Administra la información de tu vehículo</p>
-  </div>
-
-  <section class="row">
-    <!-- Car Information Card -->
-    <div class="col-12 col-sm-6">
-      <div class="car-info-section">
-        <h3>Información del Vehículo</h3>
-        
-        <div class="info-group">
-          <label class="info-label">Marca</label>
-          <div class="info-value">{{ brand() }}</div>
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-primary fw-bold">
+                <i class="fas fa-car me-3"></i>Gestión de Vehículos
+            </h1>
+            <p class="lead text-muted">Administra la información de tu vehículo</p>
         </div>
-
-        <div class="info-group">
-          <label class="info-label">Año</label>
-          <div class="info-value">{{ year() }}</div>
-        </div>
-
-        <div class="info-group">
-          <label class="info-label">Descripción Completa</label>
-          <div class="info-value">{{ getCarDescription() }}</div>
-        </div>
-
-        <div class="info-group">
-          <label class="info-label">Propietario</label>
-          <div class="info-value">{{ student() }}</div>
-        </div>
-
-        <div class="info-group">
-          <label class="info-label">Nombre en Mayúscula</label>
-          <div class="transform-options">
-            <div class="transform-item">
-              <small class="text-muted">Capitalizado:</small>
-              <span class="badge bg-secondary">{{ capitalizedStudent() }}</span>
-            </div>
-            <div class="transform-item">
-              <small class="text-muted">Método:</small>
-              <span class="badge bg-secondary">{{ student().toUpperCase() }}</span>
-            </div>
-            <div class="transform-item">
-              <small class="text-muted">Pipe:</small>
-              <span class="badge bg-secondary">{{ student() | uppercase }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Actions Card -->
-    <div class="col-12 col-sm-6">
-      <div class="car-actions-section">
-        <h3>Acciones Disponibles</h3>
-        
-        <p class="text-muted mb-4">Utiliza los siguientes botones para modificar la información del vehículo:</p>
+    <div class="row g-4">
+        <!-- Car Information Card -->
+        <div class="col-12 col-lg-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Información del Vehículo
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <!-- Brand Info -->
+                        <div class="col-12 col-md-6">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-tag me-2"></i>Marca
+                                </label>
+                                <div class="info-value bg-light p-3 rounded">
+                                    {{ brand() }}
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="action-buttons">
-          <button (click)="changeCar()" class="btn btn-primary btn-lg">
-            Cambiar Carro
-          </button>
+                        <!-- Year Info -->
+                        <div class="col-12 col-md-6">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-calendar-alt me-2"></i>Año
+                                </label>
+                                <div class="info-value bg-light p-3 rounded">
+                                    {{ year() }}
+                                </div>
+                            </div>
+                        </div>
 
-          <button (click)="changeYear()" class="btn btn-info btn-lg">
-            Actualizar Año
-          </button>
+                        <!-- Description -->
+                        <div class="col-12">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-clipboard-list me-2"></i>Descripción Completa
+                                </label>
+                                <div class="info-value bg-light p-3 rounded">
+                                    {{ getCarDescription() }}
+                                </div>
+                            </div>
+                        </div>
 
-          <button (click)="resetForm()" class="btn btn-outline-secondary btn-lg">
-            Restablecer
-          </button>
+                        <!-- Student Info -->
+                        <div class="col-12">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-user-graduate me-2"></i>Propietario
+                                </label>
+                                <div class="info-value bg-light p-3 rounded">
+                                    {{ student() }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Name Transformations -->
+                        <div class="col-12">
+                            <div class="card bg-light border-0">
+                                <div class="card-header bg-secondary text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-magic me-2"></i>Transformaciones del Nombre
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-2">
+                                        <div class="col-12 col-md-4">
+                                            <small class="text-muted">Mayúscula (método):</small>
+                                            <div class="transform-value">{{ student().toUpperCase() }}</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <small class="text-muted">Mayúscula (pipe):</small>
+                                            <div class="transform-value">{{ student() | uppercase }}</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <small class="text-muted">Capitalizado:</small>
+                                            <div class="transform-value">{{ studentCapitalized() }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Car Status Badge -->
-        <div class="car-status">
-          <label class="info-label">Estado del Vehículo</label>
-          <div class="status-badge">
-            @if(year() >= 2020) {
-              <span class="badge bg-secondary">Vehículo Moderno</span>
-            } @else if(year() >= 2015) {
-              <span class="badge bg-secondary">Vehículo Reciente</span>
-            } @else {
-              <span class="badge bg-secondary">Vehículo Clásico</span>
-            }
-          </div>
+        <!-- Actions Card -->
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tools me-2"></i>Acciones
+                    </h5>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-4">
+                        <p class="text-muted">Utiliza los siguientes botones para modificar la información del vehículo:</p>
+                    </div>
+
+                    <div class="d-grid gap-3 mt-auto">
+                        <button
+                            (click)="changeCar()"
+                            class="btn btn-primary btn-lg">
+                            <i class="fas fa-exchange-alt me-2"></i>
+                            Cambiar Carro
+                        </button>
+
+                        <button
+                            (click)="changeYear()"
+                            class="btn btn-info btn-lg">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            Actualizar Año
+                        </button>
+
+                        <button
+                            (click)="resetForm()"
+                            class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-undo me-2"></i>
+                            Restablecer
+                        </button>
+                    </div>
+
+                    <!-- Car Status Badge -->
+                    <div class="mt-4 text-center">
+                        <span
+                            class="badge fs-6 px-3 py-2"
+                            [class.bg-success]="year() >= 2020"
+                            [class.bg-warning]="year() >= 2015 && year() < 2020"
+                            [class.bg-danger]="year() < 2015">
+                            @if(year() >= 2020) {
+                                <i class="fas fa-star me-1"></i>Vehículo Moderno
+                            } @else if(year() >= 2015) {
+                                <i class="fas fa-clock me-1"></i>Vehículo Reciente
+                            } @else {
+                                <i class="fas fa-history me-1"></i>Vehículo Clásico
+                            }
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 </div>
