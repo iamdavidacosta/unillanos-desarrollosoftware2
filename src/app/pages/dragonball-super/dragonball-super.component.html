@@ -1,45 +1,36 @@
 <div class="container-fluid">
-  <div class="text-center mb-4">
-    <h1 class="display-4 text-primary fw-bold">Dragon Ball Super</h1>
-    <p class="lead text-muted">Gestiona tu lista de guerreros Z</p>
-  </div>
-
-  <section class="row">
-    <div class="col-12 col-sm-6">
-      <h3>Agregar Guerrero</h3>
-      <div class="mb-3">
-        <label class="form-label">Nombre: {{ name()}}</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Nombre del guerrero"
-          [value]="name()"
-          (change)="name.set(txtName.value)"
-          (input)="name.set(txtName.value)"
-          #txtName
-        >
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Nivel de Poder</label>
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Ej: 9000"
-          [value]="power()"
-          (input)="power.set(+txtPower.value)"
-          #txtPower
-        >
-      </div>
-      <button
-        class="btn btn-primary w-100"
-        (click)="addCharacter()"
-      >Agregar Guerrero</button>
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-primary fw-bold">
+                Dragon Ball Super
+            </h1>
+            <p class="lead text-muted">Gestiona tu lista de guerreros Z</p>
+        </div>
     </div>
 
-    <div class="col-12 col-sm-6">
-      <dragonball-character-list
-        [characters]="characters()"
-        listName="Lista de Guerreros"/>
+    <div class="row g-4">
+        <!-- Formulario para agregar personajes -->
+        <div class="col-12 col-lg-5">
+            <dragonball-character-add 
+                (newCharacter)="dragonballService.onCharacterAdded($event)">
+            </dragonball-character-add>
+        </div>
+
+        <!-- Lista de personajes -->
+        <div class="col-12 col-lg-7">
+            <div class="card shadow-sm h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">
+                        Lista de Guerreros
+                    </h5>
+                    <span class="badge bg-secondary">{{ dragonballService.characters().length }} guerreros</span>
+                </div>
+                <div class="card-body">
+                    <dragonball-character-list
+                        [characters]="dragonballService.characters()"
+                        listName="Guerreros Z Registrados"/>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
 </div>
