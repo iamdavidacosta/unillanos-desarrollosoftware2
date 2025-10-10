@@ -3,19 +3,23 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'dashboard',
-    loadComponent: () => import('./gifs/pages/dashboard-page/dashboard-page.component'),
+    loadComponent: () => import('./books/pages/dashboard-page/dashboard-page.component'),
     children: [
       {
-        path: 'trending',
-        loadComponent: () => import('./gifs/pages/trending-page/trending-page.component')
+        path: 'search-books',
+        loadComponent: () => import('./books/pages/book-search-page/search-page.component')
       },
       {
-        path: 'search',
-        loadComponent: () => import('./gifs/pages/search-page/search-page.component')
+        path: 'book-details',
+        loadComponent: () => import('./books/pages/book-details-page/trending-page.component')
+      },
+      {
+        path: 'authors',
+        loadComponent: () => import('./books/pages/authors-page/authors-page.component')
       },
       {
         path: '**',
-        redirectTo: 'trending',
+        redirectTo: 'search-books',
       }
     ]
   },

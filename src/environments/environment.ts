@@ -1,12 +1,11 @@
 export const environment = {
   production: true,
-  companyName: 'Gifs',
-  companyName2: 'App',
-  companySlogan: 'Maneja tus gifs',
+  companyName: 'Open',
+  companyName2: 'Books',
+  companySlogan: 'Explora libros y autores',
 
-  // ApiKeys
-  apiKey: 'fqSAuEuWYFCp1eXq7ybDWI19mLgtitql',
-
+  // Open Library no requiere API key
+  
   //URLS
-  urlBase: 'https://api.giphy.com/v1',
+  urlBase: 'https://openlibrary.org',
 };
