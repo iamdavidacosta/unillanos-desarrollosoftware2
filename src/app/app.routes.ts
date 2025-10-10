@@ -11,7 +11,7 @@ export const routes: Routes = [
       },
       {
         path: 'book-details',
-        loadComponent: () => import('./books/pages/book-details-page/trending-page.component')
+        loadComponent: () => import('./books/pages/book-details-page/book-details-page.component')
       },
       {
         path: 'authors',

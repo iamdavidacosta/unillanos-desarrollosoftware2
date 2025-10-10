@@ -5,8 +5,7 @@ import { BooksService } from '../../services/books.service';
 @Component({
   selector: 'app-authors-page',
   imports: [FormsModule],
-  templateUrl: './authors-page.component.html',
-  styles: ``
+  templateUrl: './authors-page.component.html'
 })
 export default class AuthorsPageComponent {
   
@@ -19,8 +18,6 @@ export default class AuthorsPageComponent {
   }
 
   onSearch() {
-    if (this.searchTerm.trim()) {
-      this.booksService.searchAuthors(this.searchTerm.trim());
-    }
+    this.booksService.searchAuthors(this.searchTerm);
   }
 }

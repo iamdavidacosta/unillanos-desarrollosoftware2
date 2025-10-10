@@ -5,8 +5,7 @@ import { BooksService } from '../../services/books.service';
 @Component({
   selector: 'app-search-page',
   imports: [FormsModule],
-  templateUrl: './search-page.component.html',
-  styles: ``
+  templateUrl: './search-page.component.html'
 })
 export default class SearchPageComponent {
   
@@ -19,12 +18,6 @@ export default class SearchPageComponent {
   }
 
   onSearch() {
-    if (this.searchTerm.trim()) {
-      this.booksService.searchBooks(this.searchTerm.trim());
-    }
-  }
-
-  getBookDetails(bookId: string) {
-    this.booksService.getBookDetails(bookId);
+    this.booksService.searchBooks(this.searchTerm);
   }
 }

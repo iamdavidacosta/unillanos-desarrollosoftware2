@@ -3,24 +3,21 @@ import { FormsModule } from '@angular/forms';
 import { BooksService } from '../../services/books.service';
 
 @Component({
-  selector: 'app-trending-page',
+  selector: 'app-book-details-page',
   imports: [FormsModule],
-  templateUrl: './trending-page.component.html',
-  styles: ``
+  templateUrl: './book-details-page.component.html'
 })
-export default class TrendingPageComponent {
+export default class BookDetailsPageComponent {
   
   private booksService = inject(BooksService);
   
-  workId = '';
+  bookId = '';
   
   get bookDetails() {
     return this.booksService.bookDetails;
   }
 
   getBookDetails() {
-    if (this.workId.trim()) {
-      this.booksService.getBookDetails(this.workId.trim());
-    }
+    this.booksService.getBookDetails(this.bookId);
   }
 }
