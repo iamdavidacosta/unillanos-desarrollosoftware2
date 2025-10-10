@@ -1,7 +1,11 @@
 # Open Books - Proyecto Final Angular
 
 ## Integrantes del Grupo
-- [Tu Nombre Aquí]
+- David Alexander Acosta Ojeda
+
+## Proyecto Desplegado
+
+https://glittering-marigold-d58d91.netlify.app/
 
 ## Descripción General del Proyecto
 Open Books es una aplicación web desarrollada en Angular 18 que consume la API pública de Open Library para explorar información sobre libros y autores. La aplicación implementa tres servicios principales de la API de Open Library para demostrar el consumo de servicios REST y la gestión de estado en Angular.
