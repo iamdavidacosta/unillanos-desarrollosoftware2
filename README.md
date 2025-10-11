@@ -16,13 +16,18 @@ src/
 ├── app/
 │   ├── books/                    # Módulo principal de libros
 │   │   ├── components/           # Componentes reutilizables
+│   │   │   ├── book-list/       # Lista de libros con items
+│   │   │   │   ├── book-list.component.ts/.html
+│   │   │   │   └── book-list-item/
+│   │   │   ├── author-list/     # Lista de autores
+│   │   │   │   └── author-list.component.ts/.html
+│   │   │   ├── book-details-display/ # Visualización de detalles
+│   │   │   │   └── book-details-display.component.ts/.html
 │   │   │   └── side-menu/       # Menú lateral de navegación
 │   │   ├── interfaces/          # Interfaces TypeScript
-│   │   │   ├── book.interfaces.ts
-│   │   │   ├── author.interfaces.ts
-│   │   │   └── openlibrary.interfaces.ts
-│   │   ├── mapper/              # Mappers para transformar datos
-│   │   │   └── book.mapper.ts
+│   │   │   ├── book.interfaces.ts    # Book, BookDetails
+│   │   │   ├── author.interfaces.ts  # Author, AuthorSearchResult
+│   │   │   └── openlibrary.interfaces.ts # APIs externas
 │   │   ├── pages/               # Componentes de página
 │   │   │   ├── book-search-page/     # Búsqueda de libros
 │   │   │   ├── book-details-page/    # Detalles de libro
@@ -40,28 +45,31 @@ src/
 - **Servicio:** Open Library Search API (`/search.json`)
 - **Funcionalidad:** Permite buscar libros por título, autor o palabras clave
 - **Características:**
-  - Campo de búsqueda con autocompletar
-  - Visualización de resultados en tarjetas
+  - Campo de búsqueda responsivo
+  - Visualización en componente reutilizable `book-list`
   - Mostrar portadas cuando están disponibles
   - Información básica: título, autor, año de publicación
+  - IDs visibles para referencia y búsquedas posteriores
 
 ### 2. Detalles de Libro 📖
 - **Servicio:** Open Library Works API (`/works/{id}.json`)
 - **Funcionalidad:** Obtiene información detallada de un libro específico
 - **Características:**
   - Búsqueda por ID de obra de Open Library
-  - Información extendida del libro
+  - Componente especializado `book-details-display`
   - Portada en alta resolución
+  - Manejo inteligente de descripciones (string/object)
   - Metadatos completos
 
 ### 3. Búsqueda de Autores ✍️
-- **Servicio:** Open Library Authors API (`/search/authors.json` + `/authors/{id}.json`)
-- **Funcionalidad:** Busca autores y muestra información biográfica
+- **Servicio:** Open Library Authors API (`/search/authors.json`)
+- **Funcionalidad:** Busca autores y muestra información profesional
 - **Características:**
   - Búsqueda por nombre de autor
-  - Información biográfica
-  - Fechas de nacimiento y muerte
-  - Fotografías cuando están disponibles
+  - Componente reutilizable `author-list`
+  - Información de obras principales
+  - Conteo de trabajos publicados
+  - IDs de autores para referencia
 
 ## Dependencias y Tecnologías
 
@@ -78,9 +86,8 @@ src/
   - No requiere autenticación
   - Endpoints utilizados:
     - `/search.json` - Búsqueda de libros
-    - `/works/{id}.json` - Detalles de obra
+    - `/works/{id}.json` - Detalles de obra específica
     - `/search/authors.json` - Búsqueda de autores
-    - `/authors/{id}.json` - Detalles de autor
 
 ## Pasos para la Ejecución
 
@@ -118,6 +125,33 @@ npm run build
 ng build
 ```
 
+## Componentes Reutilizables
+
+### 📚 `book-list`
+- **Propósito**: Visualización de listas de libros
+- **Input**: `books: Book[]`
+- **Características**: Grid responsivo, delegación a `book-list-item`
+
+### 📖 `book-list-item`
+- **Propósito**: Tarjeta individual de libro
+- **Input**: `book: Book`
+- **Características**: Portada, título, autor, año, ID visible
+
+### 👥 `author-list`
+- **Propósito**: Visualización de listas de autores
+- **Input**: `authors: AuthorSearchResult[]`
+- **Características**: Grid de autores con obra principal y conteo
+
+### 📋 `book-details-display`
+- **Propósito**: Detalles completos de un libro
+- **Input**: `bookDetails: BookDetails`
+- **Características**: Portada grande, descripción inteligente, metadatos
+
+### 🧭 `side-menu`
+- **Propósito**: Navegación lateral modular
+- **Subcomponentes**: `side-menu-header`, `side-menu-options`
+- **Características**: Responsive, rutas activas, diseño profesional
+
 ## Arquitectura y Patrones Implementados
 
 ### Signals (Angular 18)
@@ -130,15 +164,23 @@ ng build
 - Imports explícitos y específicos
 - Mejor tree-shaking y performance
 
+### Component-Based Architecture
+- **Componentes Reutilizables:**
+  - `book-list` & `book-list-item`: Visualización modular de libros
+  - `author-list`: Listado especializado de autores
+  - `book-details-display`: Detalles completos de libros
+  - `side-menu` con subcomponentes: Navegación modular
+
 ### Lazy Loading
 - Carga lazy de todas las páginas
 - Optimización del bundle inicial
 - Separación de chunks por funcionalidad
 
-### Mapper Pattern
-- Transformación consistente de datos de API
-- Separación entre interfaces de API e interfaces de dominio
-- Centralización de lógica de mapeo
+### Direct Interface Mapping
+- Mapeo directo de APIs a interfaces TypeScript
+- Sin dependencias de mappers externos
+- Transformación inline en servicios
+- Tipado fuerte sin complejidad adicional
 
 ### Service Injection
 - Inyección de dependencias con `inject()`
@@ -148,11 +190,14 @@ ng build
 ## Uso de Inteligencia Artificial
 Durante el desarrollo se utilizó IA asistiva (GitHub Copilot) para:
 - Generación de interfaces TypeScript basadas en respuestas de API
-- Optimización de consultas HTTP
-- Generación de estilos CSS/Tailwind
+- Creación de componentes reutilizables especializados
+- Optimización de consultas HTTP y mapeo de datos
+- Generación de estilos CSS/Tailwind responsivos
+- Refactorización de arquitectura de componentes
 - Documentación y comentarios de código
+- Resolución de errores de tipado TypeScript
 
-Todo el código generado fue revisado, comprendido y adaptado según las necesidades específicas del proyecto.
+Todo el código generado fue revisado, comprendido, refactorizado y adaptado según las necesidades específicas del proyecto, priorizando la simplicidad y mantenibilidad.
 
 ## Navegación de la Aplicación
 
@@ -164,10 +209,12 @@ Todo el código generado fue revisado, comprendido y adaptado según las necesid
 ## Características Técnicas Destacadas
 
 - **Responsive Design**: Adaptable a dispositivos móviles y desktop
+- **Componentización Modular**: Componentes reutilizables especializados
 - **Error Handling**: Manejo graceful de errores de API
-- **Loading States**: Indicadores de carga durante peticiones
-- **Type Safety**: Tipado fuerte con TypeScript en toda la aplicación
-- **Clean Code**: Código limpio siguiendo mejores prácticas de Angular
+- **Type Safety**: Tipado fuerte con interfaces TypeScript
+- **Clean Architecture**: Separación clara de responsabilidades
+- **Performance Optimized**: Lazy loading y standalone components
+- **User Experience**: IDs visibles para facilitar navegación entre funciones
 
 ## Licencia
 Este proyecto es para fines educativos como parte del curso de Desarrollo de Software 2.
