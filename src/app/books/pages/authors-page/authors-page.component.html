@@ -6,29 +6,7 @@
   </div>
   @if (authorResults().length > 0) {
     <h2 class="text-xl font-bold mb-4">Autores encontrados ({{ authorResults().length }})</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      @for (author of authorResults(); track author.key) {
-        <div class="bg-white rounded-lg shadow p-4">
-          <h3 class="text-lg font-bold mb-2">{{ author.name }}</h3>
-          
-          @if (author.top_work) {
-            <p class="text-gray-700 mb-1">
-              <strong>Obra principal:</strong> {{ author.top_work }}
-            </p>
-          }
-          
-          @if (author.work_count) {
-            <p class="text-gray-600 mb-1">
-              <strong>Número de obras:</strong> {{ author.work_count }}
-            </p>
-          }
-          
-          <p class="text-sm text-gray-500">
-            <strong>ID:</strong> {{ author.key }}
-          </p>
-        </div>
-      }
-    </div>
+    <author-list [authors]="authorResults()" />
   } @else {
     <p class="text-gray-500">Busca autores escribiendo en el campo de arriba</p>
   }

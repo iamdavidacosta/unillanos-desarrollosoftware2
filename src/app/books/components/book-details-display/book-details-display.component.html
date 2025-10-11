@@ -1,0 +1,21 @@
+<div class="bg-white rounded-lg shadow p-6">
+  <div class="flex flex-col md:flex-row gap-6">
+    @if (bookDetails().covers && bookDetails().covers![0]) {
+      <img [src]="'https://covers.openlibrary.org/b/id/' + bookDetails().covers![0] + '-L.jpg'" 
+           [alt]="bookDetails().title" 
+           class="w-full md:w-64 h-80 object-cover rounded-lg">
+    } @else {
+      <div class="w-full md:w-64 h-80 bg-gray-200 rounded-lg flex items-center justify-center">
+        <span class="text-gray-500">Sin portada</span>
+      </div>
+    }
+    <div class="flex-1">
+      <h2 class="text-2xl font-bold mb-4">{{ bookDetails().title }}</h2>
+      <p class="text-gray-700 mt-2">{{ bookDetails().description }}</p>
+      <p class="text-gray-700 mt-2">{{ bookDetails().first_publish_date }}</p>
+      <p class="text-blue-600 text-xs font-mono bg-blue-50 p-2 rounded mt-4">
+        <strong>ID:</strong> {{ bookDetails().key }}
+      </p>
+    </div>
+  </div>
+</div>

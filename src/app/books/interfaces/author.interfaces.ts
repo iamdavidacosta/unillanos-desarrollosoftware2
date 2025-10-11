@@ -1,8 +1,6 @@
-export interface Author {
-  id: string;
+export interface AuthorSearchResult {
+  key: string;
   name: string;
-  birth_date?: string;
-  death_date?: string;
-  bio?: string;
-  photo_url?: string;
+  top_work?: string;
+  work_count?: number;
 }

@@ -9,6 +9,9 @@
   <h3 class="text-lg font-semibold mb-2 line-clamp-2">{{ book().title }}</h3>
   <p class="text-gray-600 text-sm mb-1">{{ book().author }}</p>
   @if (book().first_publish_year) {
-    <p class="text-gray-500 text-xs">{{ book().first_publish_year }}</p>
+    <p class="text-gray-500 text-xs mb-2">{{ book().first_publish_year }}</p>
   }
+  <p class="text-blue-600 text-xs font-mono bg-blue-50 p-1 rounded">
+    <strong>ID:</strong> {{ book().id }}
+  </p>
 </div>
